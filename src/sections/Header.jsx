@@ -1,6 +1,7 @@
 import { Link as LinkScroll } from "react-scroll";
 import { useState, useEffect } from "react";
 import clsx from "clsx";
+import PropTypes from "prop-types";
 
 const Header = () => {
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -31,11 +32,15 @@ const Header = () => {
       {title}
     </LinkScroll>
   );
+  // Add PropTypes validation for NavLink component
+  NavLink.propTypes = {
+    title: PropTypes.string.isRequired, // title must be a string and is required
+  };
 
   return (
     <header
       className={clsx(
-        "fixed top-0 left-0 z-50 w-full py-10 transition-all duration-500 max-lg:px-5",
+        "fixed top-0 left-0 z-50 w-full py-10 transition-all duration-500 max-lg:py-4",
         hasScrolled && "py-2 bg-black-100 backdrop-blur-[8px]",
       )}
     >
@@ -45,27 +50,23 @@ const Header = () => {
         </a>
         <div
           className={clsx(
-            "w-full max-lg:fix max-lg:top-0 max-lg:left-0\n" +
-              "        max-lg:w-full max-lg:bg-s2 max-lg:opacity-0",
+            "w-full max-lg:fixed max-lg:top-0 max-lg:left-0 max-lg:w-full max-lg:bg-s2 max-lg:opacity-0",
             isOpen ? "max-lg:opacity-100" : "max-lg:pointer-events-none",
           )}
         >
-          <div
-            className="max-lg: relative max-lg: flex max-lg: flex-col
-                max-lg: min-h-screen max-lg:p-6 max-lg:overflow-hidden sidebar-before
-                max-md:px-4"
-          >
-            <nav className="max-lg: relative max-lg: z-2 max-lg: my-auto ">
+          <div className="max-lg:relative max-lg:flex max-lg:flex-col max-lg:min-h-screen max-lg:p-6 max-lg:overflow-hidden sidebar-before max-md:px-4">
+            <nav className="max-lg:relative max-lg:z-2 max-lg:my-auto ">
               <ul className="flex max-lg:block max-lg:px-12">
                 <li className="nav-li">
                   <NavLink title="features" />
                   <div className="dot" />
                   <NavLink title="pricing" />
                 </li>
+
                 <li className="nav-logo">
                   <LinkScroll
                     to="hero"
-                    offset={-100}
+                    offset={-250}
                     spy
                     smooth
                     className={clsx(
@@ -80,6 +81,7 @@ const Header = () => {
                     />
                   </LinkScroll>
                 </li>
+
                 <li className="nav-li">
                   <NavLink title="faq" />
                   <div className="dot" />
@@ -88,11 +90,7 @@ const Header = () => {
               </ul>
             </nav>
 
-            <div
-              className="lg:hidden block absolute top-1/2 left-0 w-[960px] h-[380px]
-            translate-x-[290px] -translate-y-1/2 rotate-90
-            "
-            >
+            <div className="lg:hidden block absolute top-1/2 left-0 w-[960px] h-[380px] translate-x-[290px] -translate-y-1/2 rotate-90">
               <img
                 src="/images/bg-outlines.svg"
                 width={960}
